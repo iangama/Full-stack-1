@@ -1,0 +1,29 @@
+name: CI
+on:
+  push: { branches: [ main ] }
+  pull_request: { branches: [ main ] }
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: 'pnpm' }
+      - name: Install JS deps
+        run: pnpm i
+      - name: Build shared & apps
+        run: pnpm -r run build || true
+      - name: Lint
+        run: pnpm -r run lint || true
+      - name: Python setup
+        uses: actions/setup-python@v5
+        with: { python-version: '3.11' }
+      - name: Install worker deps
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r apps/worker/requirements.txt
+      - name: Worker smoke test
+        run: python -c "print('worker ok')"

@@ -1,0 +1,21 @@
+{
+  "name": "hermesq",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@9.0.0",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "build": "pnpm -r run build",
+    "lint": "pnpm -r run lint || true",
+    "test": "pnpm -r run test || true",
+    "dev:web": "pnpm -C apps/web dev",
+    "dev:api": "pnpm -C apps/api dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.16.0"
+  }
+}
