@@ -14,8 +14,29 @@ export const orderRoutes: FastifyPluginAsync = async (app) => {
     return { order };
   });
 
+app.post(":id/approve", async (req, res) => {
+  const { id } = req.params as { id: string };
+
+  try {
+    const order = await app.prisma.order.update({
+      where: { id },
+      data: { status: "APPROVED" },
+    });
+
+    return { order };
+  } catch {
+    return res.status(404).send({ error: "Order not found" });
+  }
+});
   app.get("/", async () => {
     const orders = await app.prisma.order.findMany({ orderBy: { createdAt: "desc" } });
     return { orders };
+  });
+  app.post("/:id/confirm", async (req, res) => {
+    const id = (req.params as any).id;
+    const { approved } = req.body as { approved: boolean };
+    const status = approved ? "APPROVED" : "REJECTED";
+    const order = await app.prisma.order.update({ where: { id }, data: { status } });
+    return res.send({ order });
   });
 };

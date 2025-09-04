@@ -12,16 +12,17 @@
     "prisma:migrate": "prisma migrate dev --name init"
   },
   "dependencies": {
-    "fastify": "^4.28.1",
-    "@fastify/cors": "^9.0.0",
-    "@fastify/jwt": "^8.0.0",
-    "@fastify/rate-limit": "^10.0.0",
+    "@fastify/cors": "^11.1.0",
+    "@fastify/jwt": "^10.0.0",
+    "@fastify/rate-limit": "^10.3.0",
+    "@hermesq/shared": "workspace:*",
     "@prisma/client": "^5.16.0",
+    "fastify": "^5.5.0",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "prisma": "^5.16.0",
-    "typescript": "^5.5.0",
-    "tsx": "^4.16.0"
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
   }
 }
