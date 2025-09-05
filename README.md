@@ -59,9 +59,7 @@ docker-compose up --build
 
 ---
 
-## Preview
 
-> (adicione aqui prints ou GIFs do sistema rodando — API, Dashboard, Mailhog etc.)
 
 ---
 
